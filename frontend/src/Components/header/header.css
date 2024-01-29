@@ -1,0 +1,29 @@
+.headerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items : center;
+    background-color: Black;
+    height: 10vh;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.headerText{
+    color: white;
+}
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: inherit;
+}
+button{
+    border: none;
+    height: inherit;
+    padding: 20px;
+}
+button:hover{
+    background-color: white;
+}

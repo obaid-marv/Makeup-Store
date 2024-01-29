@@ -1,0 +1,27 @@
+.pContainer {
+    display: flex;
+    flex-direction: row;
+    max-width: 1024px;
+    margin-left: 120px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.product{
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    border: 1px solid black;
+    height: 30vh;
+    margin: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+img{
+    height:70%;
+
+}
+
+.product:hover{
+    box-shadow: 5px 5px 10px rgba(52, 217, 115, 0.662);
+}

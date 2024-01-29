@@ -1,0 +1,15 @@
+.navContainer{
+    display: flex;
+    flex-direction: row;
+    margin-left: 120px;
+    max-width: 1024px;
+    background-color: orange;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    
+}
+.navButtons{
+    align-items: center;
+    width: 100%;
+}

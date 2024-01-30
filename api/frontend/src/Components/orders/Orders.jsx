@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import "./orders.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../config/api";
 
 
 const Orders = () => {
@@ -14,7 +15,7 @@ const Orders = () => {
 
         const fetchData = async () =>{
             try{
-                const response = await axios.get("http://localhost:4000/api/order/userOrders",{withCredentials:true});
+                const response = await axios.get(`${API_BASE_URL}/order/userOrders`,{withCredentials:true});
                 setOrders(response.data);
             }
             catch(err){

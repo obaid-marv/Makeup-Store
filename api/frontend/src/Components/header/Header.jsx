@@ -3,6 +3,7 @@ import "./header.css"
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/authActions";
 import axios from "axios";
+import { API_BASE_URL } from "../../config/api";
 
 
 const Header = ()=>{
@@ -14,7 +15,7 @@ const Header = ()=>{
 
     const handleLogout = async ()=>{
         try{
-        await axios.get("http://localhost:4000/api/auth/logout",{withCredentials:true});
+        await axios.get(`${API_BASE_URL}/auth/logout`,{withCredentials:true});
         dispatch(logout());
         navigate("/login");
         }

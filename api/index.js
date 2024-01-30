@@ -10,10 +10,10 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 const app = express();
-const port = 4000;
+
 dotenv.config();
 
-
+const PORT = process.env.PORT || 4000;
 
 
 
@@ -58,7 +58,7 @@ app.use("/api/admin",adminRoute);
 app.use("/api/cart",cartRoute)
 
 
-app.listen(port,()=>{
+app.listen(PORT,()=>{
     console.log("port is 4000");
     connectdb();
 })

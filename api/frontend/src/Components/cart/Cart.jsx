@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./cart.css"
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { API_BASE_URL } from "../../config/api";
+
 const Cart = ()=>{
 
     const [list,setList] = useState([]);
@@ -15,7 +17,7 @@ const Cart = ()=>{
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:4000/api/cart/", {
+          const response = await axios.get(`${API_BASE_URL}/cart/`, {
             withCredentials: true,
             validateStatus: (status) => {
               return status >= 200 && status < 500;
@@ -39,7 +41,7 @@ const Cart = ()=>{
 
     const handleDelete =async (id)=>{
       try{
-        await axios.get(`http://localhost:4000/api/cart/deleteProduct/${id}`,
+        await axios.get(`${API_BASE_URL}/cart/deleteProduct/${id}`,
         {
             withCredentials:true
         })

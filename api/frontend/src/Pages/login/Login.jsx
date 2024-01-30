@@ -1,43 +1,47 @@
-import Header from "../../Components/header/Header";
-import "./signup.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../../Components/header/Header"
 import { useNavigate } from "react-router-dom";
+import "./login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { def, login } from "../../redux/authActions";
+import { API_BASE_URL } from "../../config/api";
 
-const Signup = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [contact, setContact] = useState('');
-    const [password, setPassword] = useState('');
+
+const Login = () => {
+
     const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn)
+    const [name, setName] = useState('');
+    
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = axios.post("http://localhost:4000/api/auth/register",{
-            name:name,
-            password:password,
-            email:email,
-            contact:contact
-        })
+        console.log(name, password)
+        try{
+            const res = await axios.post(`${API_BASE_URL}/auth/login`,{
+                "name":name,
+                "password":password
+            },{
+                withCredentials:true
+            })
 
-        result.then((res)=>{
             if(res.data){
-                console.log(res)
-                dispatch(login(res.data))
+
+                dispatch(login(res.data.name));
                 navigate("/home");
             }
             else{
-                console.log("some other error");
+                console.error("login failed")
             }
-            }
-        )
-        .catch(err=>console.error(err));
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
 
-    };
-
+        
     useEffect(()=>{
         dispatch(def());
         if(isLoggedIn){
@@ -45,38 +49,20 @@ const Signup = () => {
         }
     },[isLoggedIn,dispatch,navigate])
 
+    
+
     return (
         <div>
             <Header />
             <div className="login-container">
-                <h2>Signup</h2>
-                <form onSubmit={handleSubmit}>
+                <h2>Login</h2>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <label>
                         Name:
                         <input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Email:
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Contact:
-                        <input
-                            type="text"
-                            value={contact}
-                            onChange={(e) => setContact(e.target.value)}
                             required
                         />
                     </label>
@@ -91,11 +77,11 @@ const Signup = () => {
                         />
                     </label>
                     <br />
-                    <button type="submit">Signup</button>
+                    <button type="submit">Login</button>
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Signup;
+export default Login;

@@ -3,6 +3,8 @@ import "./products.css"
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config/api";
+
 const Products = ()=>{
 
     const [list,setList] = useState([]);
@@ -10,7 +12,7 @@ const Products = ()=>{
     const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
     useEffect(()=>{
 
-        const res = axios.get("http://localhost:4000/api/product/");
+        const res = axios.get(`${API_BASE_URL}/product/`);
         res.then((result)=>setList(result.data))
 
 
@@ -22,7 +24,7 @@ const Products = ()=>{
         if(isLoggedIn){
 
         try{
-            axios.post(`http://localhost:4000/api/product/addtocart/${id}`,
+            axios.post(`${API_BASE_URL}/product/addtocart/${id}`,
             {},
             {
                 withCredentials:true

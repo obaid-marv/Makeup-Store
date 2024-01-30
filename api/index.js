@@ -7,7 +7,7 @@ import orderRoute from "./routes/order.js"
 import cartRoute from "./routes/cart.js"
 import cookieparser from "cookie-parser"
 import dotenv from "dotenv";
-import cors from "cors";
+
 
 const app = express();
 
@@ -38,18 +38,18 @@ app.get("/",(req,res)=>{
     res.json("first response");
 })
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+//     res.header('Access-Control-Allow-Credentials', true);
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   
-    if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
-    } else {
-      next();
-    }
-  });
+//     if (req.method === 'OPTIONS') {
+//       res.sendStatus(200);
+//     } else {
+//       next();
+//     }
+//   });
 
 app.use("/api/auth",authRoute);
 app.use("/api/product",productRoute);
@@ -62,3 +62,8 @@ app.listen(PORT,()=>{
     console.log("port is 4000");
     connectdb();
 })
+
+
+if (process.env.NODE_ENV == "production"){
+    app.use(express.static("frontend/build"))
+}

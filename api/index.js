@@ -38,18 +38,18 @@ app.get("/",(req,res)=>{
     res.json("first response");
 })
 
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-//     res.header('Access-Control-Allow-Credentials', true);
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://ecomnew-env.eba-xbdbdksz.eu-north-1.elasticbeanstalk.com');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   
-//     if (req.method === 'OPTIONS') {
-//       res.sendStatus(200);
-//     } else {
-//       next();
-//     }
-//   });
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
+  });
 
 app.use("/api/auth",authRoute);
 app.use("/api/product",productRoute);
